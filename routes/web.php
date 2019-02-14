@@ -33,3 +33,31 @@ Route::get('/seunomecomregra/{nome}/{n}', function($nome,$n){
         echo "<h1>Ola, $nome!($i)</h1>";
     }
 })->where('n','[0-9]+')->where('nome','[A-Za-z]+');
+
+
+Route::prefix('app')->group(function(){
+    Route::get("/",function(){
+       return"Pagina principal do APP";
+    });
+    Route::get("profile",function(){
+        return"Pagina profile";
+    });
+    Route::get("about",function(){
+        return"Meu about";
+    });
+});
+
+    Route::redirect('/aqui','ola',301);
+
+    Route::view('/hello','hello');
+
+
+
+    Route::view('/viewnome','hellonome',
+        ['nome'=>'rogerio','sobrenome'=>'pires']);
+
+    Route::get('/hellonome/{nome}/{sobrenome}',function($nome,$sn){
+        return view('hellonome',
+        ['nome'=>$nome,
+        'sobrenome'=>$sn]);
+});
